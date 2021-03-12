@@ -14,6 +14,7 @@ import members from "../members.json";
 // @ts-ignore
 export default function MemberScreen(props) {
   return (
+    //le composant flatlist fait le meme job que scrollview plus map()
     <FlatList
       contentContainerStyle={styles.container}
       data={members}
