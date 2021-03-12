@@ -8,27 +8,31 @@ import {
   Image,
   Text,
 } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import members from "../members.json";
 
 // @ts-ignore
 export default function MemberScreen(props) {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {members.map((m) => (
+    <FlatList
+      contentContainerStyle={styles.container}
+      data={members}
+      keyExtractor={(item, index) => item.id}
+      renderItem={({ item }) => (
         <>
           <TouchableOpacity
             style={styles.membre}
-            onPress={() => props.navigation.push("Profile", { id: m["id"] })}
+            onPress={() => props.navigation.push("Profile", { id: item.id })}
           >
             <Image
               style={styles.image}
-              source={{ width: 100, height: 100, uri: m["url"] }}
+              source={{ width: 50, height: 50, uri: item.url }}
             />
-            <Text style={styles.name}>{m.name}</Text>
+            <Text style={styles.name}>{item.name}</Text>
           </TouchableOpacity>
         </>
-      ))}
-    </ScrollView>
+      )}
+    />
   );
 }
 const styles = StyleSheet.create({
